@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LaManiguette · Bistronomie de la viande · Lyon Croix-Rousse</title>
+<meta name="description" content="LaManiguette, restaurant bistronomique spécialisé dans la viande à Lyon Croix-Rousse. Viandes maturées, cuissons justes. Réservez votre table, mardi au samedi.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  /* ============ TOKENS ============ */
+  :root{
+    --char:#1B1714;
+    --char-2:#272019;
+    --ember:#8A2433;
+    --ember-deep:#6E1622;
+    --rose:#D2A79E;
+    --maniguette:#5C4733;
+    --cendre:#E9E7E2;
+    --lin:#F7F6F3;
+    --white:#FFFFFF;
+
+    --ink:#1B1714;
+    --ink-soft:#5A514A;
+    --on-dark:#F3EFEA;
+    --on-dark-soft:#BDB2A6;
+    --line:#D9D5CE;
+    --line-dark:#3A302A;
+
+    --display:"Instrument Serif", Georgia, "Times New Roman", serif;
+    --body:"Hanken Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+    --sp-1:8px; --sp-2:16px; --sp-3:24px; --sp-4:40px;
+    --sp-5:64px; --sp-6:96px; --sp-7:128px;
+
+    --radius:5px;
+    --maxw:1160px;
+    --ease:cubic-bezier(.22,.61,.36,1);
+
+    --cuisson:linear-gradient(90deg,#6E1622 0%,#8A2433 28%,#B5575A 55%,#7A4A3A 80%,#2A1F19 100%);
+  }
+
+  /* ============ BASE / RESET ============ */
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:var(--body);
+    font-size:16px;
+    line-height:1.6;
+    color:var(--ink);
+    background:var(--lin);
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+  img{max-width:100%;display:block;}
+  a{color:inherit;}
+  h1,h2,h3{margin:0;font-family:var(--display);font-weight:400;letter-spacing:.005em;line-height:1.04;}
+  p{margin:0;}
+  button{font-family:inherit;cursor:pointer;}
+
+  .wrap{max-width:var(--maxw);margin-inline:auto;padding-inline:24px;}
+  @media(max-width:640px){.wrap{padding-inline:20px;}}
+
+  .eyebrow{
+    font-size:.8125rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--ember);display:inline-flex;gap:.55em;align-items:center;margin:0 0 var(--sp-2);
+  }
+  .eyebrow::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--maniguette);}
+  .on-dark .eyebrow{color:var(--rose);}
+  .on-dark .eyebrow::before{background:var(--rose);}
+
+  .lead{font-size:1.0625rem;color:var(--ink-soft);max-width:54ch;}
+  .on-dark{color:var(--on-dark);}
+  .on-dark .lead{color:var(--on-dark-soft);}
+
+  section{padding-block:var(--sp-6);}
+  @media(max-width:640px){section{padding-block:var(--sp-5);}}
+
+  .h2{font-size:clamp(2rem,5vw,2.75rem);}
+  .italic{font-style:italic;}
+
+  /* divider gradient cuisson */
+  .rule-cuisson{height:3px;width:120px;background:var(--cuisson);border-radius:3px;margin-bottom:var(--sp-3);}
+
+  /* ============ BUTTONS ============ */
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:.5em;
+    min-height:48px;padding:0 26px;border-radius:var(--radius);
+    font-weight:600;font-size:.95rem;letter-spacing:.01em;text-decoration:none;
+    border:1px solid transparent;transition:transform .2s var(--ease),background .2s var(--ease),box-shadow .2s var(--ease);
+  }
+  .btn-primary{background:var(--ember);color:var(--white);}
+  .btn-primary:hover{background:var(--ember-deep);transform:translateY(-2px);box-shadow:0 10px 24px -12px rgba(110,22,34,.7);}
+  .btn-ghost{background:transparent;color:var(--ink);border-color:var(--line);}
+  .btn-ghost:hover{border-color:var(--ink);transform:translateY(-2px);}
+  .on-dark .btn-ghost{color:var(--on-dark);border-color:rgba(243,239,234,.35);}
+  .on-dark .btn-ghost:hover{border-color:var(--on-dark);}
+  .link-arrow{
+    display:inline-flex;align-items:center;gap:.45em;font-weight:600;text-decoration:none;
+    color:inherit;border-bottom:1px solid currentColor;padding-bottom:2px;transition:gap .2s var(--ease),opacity .2s var(--ease);
+  }
+  .link-arrow:hover{gap:.8em;opacity:.75;}
+
+  /* focus visibility */
+  a:focus-visible,button:focus-visible,input:focus-visible,summary:focus-visible,[tabindex]:focus-visible{
+    outline:3px solid var(--ember);outline-offset:3px;border-radius:3px;
+  }
+  .on-dark a:focus-visible,.on-dark button:focus-visible{outline-color:var(--rose);}
+
+  /* skip link */
+  .skip{position:absolute;left:12px;top:-60px;background:var(--char);color:var(--on-dark);
+    padding:10px 16px;border-radius:var(--radius);z-index:1000;transition:top .2s var(--ease);text-decoration:none;font-weight:600;}
+  .skip:focus{top:12px;}
+
+  /* ============ HEADER ============ */
+  .site-header{
+    position:sticky;top:0;z-index:100;
+    background:rgba(247,246,243,.86);backdrop-filter:saturate(1.4) blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{display:flex;align-items:center;justify-content:space-between;gap:var(--sp-3);min-height:68px;}
+  .brand{font-family:var(--display);font-size:1.5rem;letter-spacing:.01em;text-decoration:none;color:var(--ink);white-space:nowrap;}
+  .brand b{color:var(--ember);font-weight:400;}
+  .nav-links{display:flex;align-items:center;gap:var(--sp-3);list-style:none;margin:0;padding:0;}
+  .nav-links a{text-decoration:none;font-weight:500;font-size:.94rem;color:var(--ink-soft);transition:color .15s var(--ease);}
+  .nav-links a:hover{color:var(--ink);}
+  .nav-cta{display:flex;align-items:center;gap:var(--sp-2);}
+  .nav-reserve{min-height:42px;padding:0 18px;}
+  .hamburger{display:none;width:46px;height:46px;border:1px solid var(--line);background:transparent;border-radius:var(--radius);align-items:center;justify-content:center;}
+  .hamburger svg{width:22px;height:22px;}
+
+  @media(max-width:880px){
+    .nav-links{
+      position:absolute;top:68px;left:0;right:0;flex-direction:column;align-items:flex-start;gap:0;
+      background:var(--lin);border-bottom:1px solid var(--line);padding:8px 20px 20px;
+      transform:translateY(-12px);opacity:0;pointer-events:none;transition:opacity .2s var(--ease),transform .2s var(--ease);
+    }
+    .nav-links.open{transform:none;opacity:1;pointer-events:auto;}
+    .nav-links li{width:100%;}
+    .nav-links a{display:block;padding:14px 0;font-size:1.05rem;border-bottom:1px solid var(--line);width:100%;}
+    .nav-links li:last-child a{border-bottom:none;}
+    .hamburger{display:inline-flex;}
+    .nav-reserve{display:none;}
+  }
+
+  /* ============ HERO ============ */
+  .hero{position:relative;color:var(--on-dark);overflow:hidden;background:var(--char);}
+  .hero-media{position:absolute;inset:0;
+    background:
+      radial-gradient(120% 90% at 75% 15%, rgba(138,36,51,.55), transparent 60%),
+      linear-gradient(180deg,#241c17 0%, #140f0c 100%);
+    background-size:cover;background-position:center;}
+  .hero-media::after{content:"";position:absolute;inset:0;
+    background:linear-gradient(180deg, rgba(20,15,12,.35) 0%, rgba(20,15,12,.55) 45%, rgba(20,15,12,.92) 100%);}
+  .hero-inner{position:relative;z-index:2;padding-block:clamp(72px,12vw,140px) 0;}
+  .hero h1{font-size:clamp(2.9rem,8.5vw,5.5rem);max-width:14ch;margin-bottom:var(--sp-3);}
+  .hero h1 .italic{color:var(--rose);}
+  .hero-sub{font-size:1.15rem;color:var(--on-dark-soft);max-width:46ch;margin-bottom:var(--sp-4);}
+  .hero-actions{display:flex;flex-wrap:wrap;gap:var(--sp-2);align-items:center;margin-bottom:var(--sp-5);}
+  .hero-foot{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding-bottom:34px;
+    font-size:.92rem;color:var(--on-dark-soft);letter-spacing:.02em;}
+  .hero-foot .dot{width:4px;height:4px;border-radius:50%;background:var(--rose);}
+
+  /* échelle de cuisson — SIGNATURE */
+  .cuisson{position:relative;z-index:2;padding-bottom:var(--sp-3);}
+  .cuisson-bar{height:14px;border-radius:8px;background:var(--cuisson);
+    box-shadow:0 0 40px -6px rgba(181,87,90,.55);}
+  .cuisson-scale{display:flex;justify-content:space-between;margin-top:10px;
+    font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--on-dark-soft);font-weight:600;}
+  .cuisson-scale span{flex:1;text-align:center;}
+  .cuisson-scale span:first-child{text-align:left;}
+  .cuisson-scale span:last-child{text-align:right;}
+  @media(max-width:560px){
+    .cuisson-scale{font-size:.62rem;letter-spacing:.08em;}
+    .hero-sub{font-size:1.05rem;}
+  }
+
+  /* ============ LE LIEU ============ */
+  .lieu-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:var(--sp-5);align-items:center;}
+  .lieu-figure{position:relative;border-radius:8px;overflow:hidden;aspect-ratio:4/5;
+    background:linear-gradient(160deg,#2a201a,#140f0c);}
+  .lieu-figure img{width:100%;height:100%;object-fit:cover;}
+  .lieu-note{margin-top:var(--sp-3);padding:var(--sp-3);background:var(--cendre);border-radius:8px;border-left:3px solid var(--ember);}
+  .lieu-note h3{font-size:1.2rem;margin-bottom:6px;}
+  .lieu-note p{font-size:.95rem;color:var(--ink-soft);}
+  @media(max-width:820px){.lieu-grid{grid-template-columns:1fr;gap:var(--sp-4);}
+    .lieu-figure{aspect-ratio:16/11;order:-1;}}
+
+  /* ============ CARTE ============ */
+  .carte{background:var(--cendre);}
+  .carte-head{display:flex;justify-content:space-between;align-items:flex-end;gap:var(--sp-3);margin-bottom:var(--sp-4);flex-wrap:wrap;}
+  .menu-block{margin-bottom:var(--sp-5);}
+  .menu-block:last-child{margin-bottom:0;}
+  .menu-title{font-size:1.5rem;margin-bottom:var(--sp-3);display:flex;align-items:baseline;gap:12px;}
+  .menu-title small{font-family:var(--body);font-size:.72rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--maniguette);}
+  .menu-list{display:grid;gap:2px;}
+  .menu-item{display:grid;grid-template-columns:1fr auto;gap:6px 18px;align-items:baseline;
+    padding:16px 0;border-bottom:1px solid var(--line);}
+  .menu-item:last-child{border-bottom:none;}
+  .menu-item .name{font-weight:600;font-size:1.05rem;}
+  .menu-item .desc{grid-column:1/2;font-size:.92rem;color:var(--ink-soft);margin-top:2px;}
+  .menu-item .price{font-weight:600;font-variant-numeric:tabular-nums;white-space:nowrap;color:var(--ember);}
+  .menu-feature{background:var(--char);color:var(--on-dark);border-radius:10px;overflow:hidden;
+    display:grid;grid-template-columns:1fr 1fr;margin-bottom:var(--sp-5);}
+  .menu-feature .mf-img{background:linear-gradient(160deg,#3a241c,#140f0c);min-height:340px;background-size:cover;background-position:center;}
+  .menu-feature .mf-body{padding:var(--sp-4);display:flex;flex-direction:column;justify-content:center;}
+  .menu-feature .mf-body .eyebrow{color:var(--rose);}
+  .menu-feature .mf-body .eyebrow::before{background:var(--rose);}
+  .menu-feature h3{font-size:2rem;margin-bottom:10px;}
+  .menu-feature p{color:var(--on-dark-soft);font-size:.98rem;margin-bottom:var(--sp-3);max-width:42ch;}
+  .menu-feature .mf-price{font-size:1.25rem;font-weight:600;font-variant-numeric:tabular-nums;}
+  .menu-feature .mf-price span{font-size:.85rem;color:var(--on-dark-soft);font-weight:500;margin-left:6px;}
+  .menu-cols{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-5);}
+  @media(max-width:820px){
+    .menu-feature{grid-template-columns:1fr;}
+    .menu-feature .mf-img{min-height:220px;}
+    .menu-cols{grid-template-columns:1fr;gap:var(--sp-4);}
+  }
+
+  /* ============ FORMULES ============ */
+  .formules{background:var(--char);color:var(--on-dark);}
+  .formules-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp-3);margin-top:var(--sp-4);}
+  .formule{border:1px solid var(--line-dark);border-radius:10px;padding:var(--sp-4) var(--sp-3);
+    display:flex;flex-direction:column;gap:12px;transition:transform .2s var(--ease),border-color .2s var(--ease);}
+  .formule:hover{transform:translateY(-4px);border-color:var(--ember);}
+  .formule.feature{background:linear-gradient(170deg,rgba(138,36,51,.22),transparent);border-color:var(--ember);}
+  .formule .tag{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;font-weight:600;color:var(--rose);}
+  .formule h3{font-size:1.6rem;}
+  .formule .fprice{font-size:2.1rem;font-family:var(--display);}
+  .formule .fprice em{font-style:normal;font-family:var(--body);font-size:.9rem;color:var(--on-dark-soft);font-weight:500;}
+  .formule ul{list-style:none;margin:0;padding:0;display:grid;gap:8px;font-size:.94rem;color:var(--on-dark-soft);}
+  .formule li{display:flex;gap:10px;align-items:flex-start;}
+  .formule li::before{content:"";flex:none;width:6px;height:6px;border-radius:50%;background:var(--ember);margin-top:8px;}
+  @media(max-width:820px){.formules-grid{grid-template-columns:1fr;}}
+
+  /* ============ RÉSERVATION ============ */
+  .resa-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:var(--sp-5);align-items:start;}
+  .resa-card{background:var(--white);border:1px solid var(--line);border-radius:12px;padding:var(--sp-4);
+    box-shadow:0 24px 60px -40px rgba(27,23,20,.4);}
+  .resa-step{margin-bottom:var(--sp-3);}
+  .resa-step:last-of-type{margin-bottom:0;}
+  .resa-label{font-size:.78rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--maniguette);
+    display:flex;align-items:center;gap:10px;margin-bottom:12px;}
+  .resa-label .n{width:22px;height:22px;border-radius:50%;background:var(--ember);color:#fff;font-size:.75rem;
+    display:inline-flex;align-items:center;justify-content:center;font-family:var(--body);}
+  .date-picker{display:flex;align-items:center;justify-content:space-between;gap:12px;
+    border:1px solid var(--line);border-radius:var(--radius);padding:6px;}
+  .date-picker .dp-label{font-weight:600;font-size:1.05rem;text-align:center;flex:1;}
+  .icon-btn{width:44px;height:44px;border-radius:6px;border:1px solid var(--line);background:var(--lin);
+    display:inline-flex;align-items:center;justify-content:center;transition:background .15s var(--ease),border-color .15s;}
+  .icon-btn:hover:not(:disabled){background:var(--cendre);border-color:var(--ink);}
+  .icon-btn:disabled{opacity:.35;cursor:not-allowed;}
+  .icon-btn svg{width:18px;height:18px;}
+  .seg{display:flex;gap:8px;}
+  .seg button{flex:1;min-height:48px;border-radius:var(--radius);border:1px solid var(--line);background:var(--lin);
+    font-weight:600;font-size:.95rem;color:var(--ink);transition:all .15s var(--ease);}
+  .seg button[aria-pressed="true"]{background:var(--ember);border-color:var(--ember);color:#fff;}
+  .seg button:hover:not([aria-pressed="true"]){border-color:var(--ink);}
+  .stepper{display:flex;align-items:center;gap:14px;}
+  .stepper .count{font-size:1.3rem;font-weight:600;font-variant-numeric:tabular-nums;min-width:52px;text-align:center;}
+  .slots{display:grid;grid-template-columns:repeat(auto-fill,minmax(82px,1fr));gap:8px;}
+  .slot{min-height:46px;border-radius:var(--radius);border:1px solid var(--line);background:var(--lin);
+    font-weight:600;font-variant-numeric:tabular-nums;font-size:.95rem;color:var(--ink);transition:all .15s var(--ease);}
+  .slot:hover:not(:disabled):not([aria-pressed="true"]){border-color:var(--ink);}
+  .slot[aria-pressed="true"]{background:var(--ember);border-color:var(--ember);color:#fff;}
+  .slot:disabled{opacity:.4;cursor:not-allowed;text-decoration:line-through;}
+  .resa-closed{padding:var(--sp-3);background:var(--cendre);border-radius:var(--radius);text-align:center;color:var(--ink-soft);font-size:.95rem;}
+  .recap{margin-top:var(--sp-3);padding:var(--sp-3);background:var(--char);color:var(--on-dark);border-radius:10px;}
+  .recap .rline{font-size:1.05rem;font-weight:600;margin-bottom:14px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;}
+  .recap .rline .sep{color:var(--rose);}
+  .recap .btn{width:100%;}
+  .recap-hint{font-size:.82rem;color:var(--ink-soft);margin-top:12px;text-align:center;}
+  .confirm-box{padding:var(--sp-3);background:#173a2a;color:#dceee4;border-radius:10px;margin-top:var(--sp-3);}
+  .confirm-box strong{display:block;font-size:1.05rem;margin-bottom:6px;}
+  .confirm-box button{margin-top:14px;background:transparent;border:1px solid rgba(220,238,228,.4);color:#dceee4;
+    min-height:42px;padding:0 16px;border-radius:var(--radius);font-weight:600;}
+  .resa-side h2{font-size:clamp(2rem,5vw,2.6rem);margin-bottom:var(--sp-2);}
+  .resa-info{list-style:none;padding:0;margin:var(--sp-3) 0 0;display:grid;gap:14px;}
+  .resa-info li{display:flex;gap:12px;align-items:flex-start;font-size:.96rem;color:var(--ink-soft);}
+  .resa-info svg{width:20px;height:20px;flex:none;color:var(--ember);margin-top:2px;}
+  @media(max-width:880px){.resa-grid{grid-template-columns:1fr;gap:var(--sp-4);}
+    .resa-side{order:-1;}}
+
+  /* ============ AVIS ============ */
+  .avis{background:var(--cendre);}
+  .avis-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp-3);margin-top:var(--sp-4);}
+  .avis-card{background:var(--white);border:1px solid var(--line);border-radius:10px;padding:var(--sp-3);display:flex;flex-direction:column;gap:14px;}
+  .stars{display:flex;gap:3px;color:var(--ember);}
+  .stars svg{width:18px;height:18px;}
+  .avis-card blockquote{margin:0;font-family:var(--display);font-size:1.25rem;line-height:1.3;}
+  .avis-card .who{font-size:.88rem;color:var(--ink-soft);font-weight:500;margin-top:auto;}
+  @media(max-width:820px){.avis-grid{grid-template-columns:1fr;}}
+
+  /* ============ FAQ ============ */
+  .faq-grid{display:grid;grid-template-columns:.55fr 1fr;gap:var(--sp-5);align-items:start;}
+  .faq-list{display:grid;gap:0;}
+  .faq-item{border-bottom:1px solid var(--line);}
+  .faq-item:first-child{border-top:1px solid var(--line);}
+  .faq-q{width:100%;text-align:left;background:none;border:none;padding:22px 40px 22px 0;position:relative;
+    font-size:1.1rem;font-weight:600;color:var(--ink);display:flex;justify-content:space-between;gap:16px;align-items:center;}
+  .faq-q .chev{flex:none;width:22px;height:22px;transition:transform .25s var(--ease);color:var(--ember);}
+  .faq-q[aria-expanded="true"] .chev{transform:rotate(45deg);}
+  .faq-a{overflow:hidden;max-height:0;transition:max-height .3s var(--ease);}
+  .faq-a .faq-a-inner{padding:0 0 22px;color:var(--ink-soft);font-size:.98rem;max-width:60ch;}
+  @media(max-width:820px){.faq-grid{grid-template-columns:1fr;gap:var(--sp-3);}}
+
+  /* ============ CONTACT / FOOTER ============ */
+  .contact{background:var(--char);color:var(--on-dark);}
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-5);align-items:start;}
+  .contact h2{font-size:clamp(2rem,5vw,2.8rem);margin-bottom:var(--sp-2);}
+  .contact-list{list-style:none;padding:0;margin:var(--sp-3) 0 0;display:grid;gap:18px;}
+  .contact-list li{display:flex;gap:14px;align-items:flex-start;}
+  .contact-list svg{width:22px;height:22px;flex:none;color:var(--rose);margin-top:2px;}
+  .contact-list a{text-decoration:none;}
+  .contact-list a:hover{color:var(--rose);}
+  .contact-list .k{font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--on-dark-soft);margin-bottom:3px;}
+  .hours-table{width:100%;border-collapse:collapse;margin-top:8px;}
+  .hours-table td{padding:9px 0;border-bottom:1px solid var(--line-dark);font-size:.95rem;}
+  .hours-table td:last-child{text-align:right;color:var(--on-dark-soft);font-variant-numeric:tabular-nums;}
+  .hours-table tr.closed td:last-child{color:var(--rose);}
+  .map-box{aspect-ratio:4/3;border-radius:10px;overflow:hidden;border:1px solid var(--line-dark);
+    background:
+      repeating-linear-gradient(45deg,rgba(255,255,255,.02) 0 16px,transparent 16px 32px),
+      linear-gradient(160deg,#241c17,#140f0c);
+    display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;}
+  .map-box .pin{display:flex;flex-direction:column;align-items:center;gap:10px;color:var(--on-dark-soft);}
+  .map-box .pin svg{width:34px;height:34px;color:var(--ember);}
+  .map-box .pin b{color:var(--on-dark);font-weight:600;}
+  @media(max-width:820px){.contact-grid{grid-template-columns:1fr;gap:var(--sp-4);}}
+
+  .footer{background:#120d0b;color:var(--on-dark-soft);padding-block:var(--sp-4);}
+  .footer-row{display:flex;justify-content:space-between;align-items:center;gap:var(--sp-3);flex-wrap:wrap;}
+  .footer .brand{color:var(--on-dark);}
+  .footer-bar{height:3px;background:var(--cuisson);border-radius:3px;margin-bottom:var(--sp-3);}
+  .footer small{font-size:.85rem;}
+  .footer a{text-decoration:none;}
+  .footer a:hover{color:var(--rose);}
+
+  /* ============ REVEAL ANIMATION ============ */
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .6s var(--ease),transform .6s var(--ease);}
+  .reveal.in{opacity:1;transform:none;}
+
+  @media(prefers-reduced-motion:reduce){
+    *{scroll-behavior:auto !important;}
+    .reveal{opacity:1 !important;transform:none !important;transition:none !important;}
+    .btn,.formule,.icon-btn,.slot,.seg button,.faq-a,.faq-q .chev,.link-arrow{transition:none !important;}
+  }
+</style>
+</head>
+<body>
+<a href="#main" class="skip">Aller au contenu principal</a>
+
+<!-- ============ HEADER ============ -->
+<header class="site-header">
+  <div class="wrap nav">
+    <a href="#" class="brand" aria-label="LaManiguette, accueil">La<b>Maniguette</b></a>
+    <nav aria-label="Navigation principale">
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#lieu">Le lieu</a></li>
+        <li><a href="#carte">La carte</a></li>
+        <li><a href="#formules">Formules</a></li>
+        <li><a href="#reservation">Réserver</a></li>
+        <li><a href="#avis">Avis</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="nav-cta">
+      <a href="#reservation" class="btn btn-primary nav-reserve">Réserver</a>
+      <button class="hamburger" id="hamburger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="navLinks">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero-media" id="heroMedia" role="img" aria-label="Côte de bœuf saisie sur la braise, lumière basse"></div>
+    <div class="wrap hero-inner">
+      <p class="eyebrow">Épice · Braise · Lyon</p>
+      <h1 id="hero-title">La viande,<br>à sa <span class="italic">juste</span> cuisson.</h1>
+      <p class="hero-sub">Bistronomie de la flamme et du couteau, à la Croix-Rousse. Des pièces maturées, choisies à la source, saisies pile au point que vous aimez.</p>
+      <div class="hero-actions">
+        <a href="#reservation" class="btn btn-primary">Réserver une table</a>
+        <a href="#carte" class="link-arrow">Voir la carte
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+      <div class="cuisson" aria-hidden="true">
+        <div class="cuisson-bar"></div>
+        <div class="cuisson-scale">
+          <span>Bleu</span><span>Saignant</span><span>À point</span><span>Cuit</span><span>Bien cuit</span>
+        </div>
+      </div>
+      <div class="hero-foot">
+        <span>Mardi – Samedi</span><span class="dot"></span>
+        <span>12h–14h · 19h–22h30</span><span class="dot"></span>
+        <span>Lyon Croix-Rousse</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ LE LIEU ============ -->
+  <section id="lieu">
+    <div class="wrap">
+      <div class="lieu-grid">
+        <div class="reveal">
+          <div class="rule-cuisson"></div>
+          <p class="eyebrow">Le lieu</p>
+          <h2 class="h2">Une table de carnivores <span class="italic">éclairés</span>.</h2>
+          <p class="lead" style="margin-top:16px">LaManiguette tient du bistrot par l'ardoise et la convivialité, de la gastronomie par l'exigence. Ici, la viande n'est pas un produit que l'on cuit&nbsp;: c'est une matière que l'on respecte — du choix de l'éleveur à la maturation, jusqu'à la seconde près sur la braise.</p>
+          <div class="lieu-note">
+            <h3>Pourquoi « Maniguette »&nbsp;?</h3>
+            <p>La maniguette, ou graine de paradis, est un poivre ouest-africain aux notes de cardamome et d'agrume. On la retrouve dans nos jus et nos condiments&nbsp;: une signature discrète, un peu de chaleur derrière chaque pièce.</p>
+          </div>
+        </div>
+        <figure class="lieu-figure reveal" style="margin:0">
+          <img id="lieuImg" alt="Salle du restaurant LaManiguette, ambiance tamisée et bois sombre" loading="lazy" width="800" height="1000">
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CARTE ============ -->
+  <section id="carte" class="carte">
+    <div class="wrap">
+      <div class="carte-head reveal">
+        <div>
+          <div class="rule-cuisson"></div>
+          <p class="eyebrow">La carte</p>
+          <h2 class="h2">Des produits courts,<br>une cuisson longue.</h2>
+        </div>
+        <p class="lead">Carte renouvelée au fil des arrivages. Toutes nos viandes sont d'origine française et travaillées maison.</p>
+      </div>
+
+      <!-- pièce signature -->
+      <article class="menu-feature reveal">
+        <div class="mf-img" id="feature1Img" role="img" aria-label="Côte de bœuf maturée tranchée sur planche"></div>
+        <div class="mf-body">
+          <p class="eyebrow">La pièce signature</p>
+          <h3>Côte de bœuf maturée 45 jours</h3>
+          <p>Race Aubrac, maturée en cave à sec pour une chair tendre et un goût profond de noisette. Servie à partager, tranchée, avec os à moelle rôti et notre sel à la maniguette. Cuisson saignante conseillée.</p>
+          <div class="mf-price">68&nbsp;€ <span>pour 2 personnes · 1&nbsp;kg env.</span></div>
+        </div>
+      </article>
+
+      <!-- viandes -->
+      <div class="menu-block reveal">
+        <h3 class="menu-title">Les viandes <small>à la pièce</small></h3>
+        <div class="menu-list">
+          <div class="menu-item"><span class="name">Onglet de bœuf, échalotes confites au vin de Bourgueil</span><span class="price">26&nbsp;€</span><span class="desc">Coupe à fibres, persillée — saignant à à point.</span></div>
+          <div class="menu-item"><span class="name">Pièce du boucher, jus corsé à la maniguette</span><span class="price">28&nbsp;€</span><span class="desc">Le morceau du jour, selon le retour du boucher.</span></div>
+          <div class="menu-item"><span class="name">Magret de canard des Landes, navets glacés</span><span class="price">27&nbsp;€</span><span class="desc">Peau croustillante, chair rosée.</span></div>
+          <div class="menu-item"><span class="name">Souris d'agneau confite 7 heures, ail noir</span><span class="price">29&nbsp;€</span><span class="desc">Fondante, se détache à la cuillère.</span></div>
+          <div class="menu-item"><span class="name">Ris de veau doré au beurre, mousseline de céleri</span><span class="price">34&nbsp;€</span><span class="desc">Croustillant dehors, moelleux dedans.</span></div>
+        </div>
+      </div>
+
+      <div class="menu-cols">
+        <div class="menu-block reveal">
+          <h3 class="menu-title">Pour commencer</h3>
+          <div class="menu-list">
+            <div class="menu-item"><span class="name">Tartare de bœuf au couteau, condiment maniguette</span><span class="price">16&nbsp;€</span></div>
+            <div class="menu-item"><span class="name">Œuf parfait, crème de lard fumé, croûtons</span><span class="price">14&nbsp;€</span></div>
+            <div class="menu-item"><span class="name">Velouté de saison, huile de noisette</span><span class="price">12&nbsp;€</span></div>
+            <div class="menu-item"><span class="name">Terrine maison, pickles d'oignon rouge</span><span class="price">13&nbsp;€</span></div>
+          </div>
+        </div>
+        <div class="menu-block reveal">
+          <h3 class="menu-title">Accompagnements</h3>
+          <div class="menu-list">
+            <div class="menu-item"><span class="name">Frites fraîches, sel à la maniguette</span><span class="price">7&nbsp;€</span></div>
+            <div class="menu-item"><span class="name">Gratin dauphinois</span><span class="price">8&nbsp;€</span></div>
+            <div class="menu-item"><span class="name">Légumes de saison rôtis</span><span class="price">8&nbsp;€</span></div>
+            <div class="menu-item"><span class="name">Salade verte, vinaigrette maison</span><span class="price">6&nbsp;€</span></div>
+          </div>
+          <h3 class="menu-title" style="margin-top:40px">Desserts</h3>
+          <div class="menu-list">
+            <div class="menu-item"><span class="name">Paris-Brest, praliné maison</span><span class="price">11&nbsp;€</span></div>
+            <div class="menu-item"><span class="name">Tarte fine aux pommes, glace vanille</span><span class="price">10&nbsp;€</span></div>
+            <div class="menu-item"><span class="name">Mousse au chocolat grand cru</span><span class="price">9&nbsp;€</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FORMULES ============ -->
+  <section id="formules" class="formules on-dark">
+    <div class="wrap">
+      <div class="reveal" style="max-width:560px">
+        <div class="rule-cuisson"></div>
+        <p class="eyebrow">Formules</p>
+        <h2 class="h2">Trois façons de passer à table.</h2>
+        <p class="lead">Prix nets, service compris. Les formules évoluent avec la carte du moment.</p>
+      </div>
+      <div class="formules-grid">
+        <div class="formule reveal">
+          <span class="tag">Le midi · Mar–Ven</span>
+          <h3>Déjeuner</h3>
+          <div class="fprice">24&nbsp;€ <em>/ 2 services</em></div>
+          <ul>
+            <li>Entrée + plat, ou plat + dessert</li>
+            <li>Plat du jour autour d'une viande</li>
+            <li>29&nbsp;€ en 3 services</li>
+          </ul>
+        </div>
+        <div class="formule feature reveal">
+          <span class="tag">Le plus choisi</span>
+          <h3>Menu LaManiguette</h3>
+          <div class="fprice">52&nbsp;€ <em>/ 3 services</em></div>
+          <ul>
+            <li>Entrée, viande au choix, dessert</li>
+            <li>Pain et beurre de baratte</li>
+            <li>Midi et soir, toute la table</li>
+          </ul>
+        </div>
+        <div class="formule reveal">
+          <span class="tag">L'expérience</span>
+          <h3>Dégustation</h3>
+          <div class="fprice">78&nbsp;€ <em>/ 5 temps</em></div>
+          <ul>
+            <li>Cinq temps autour de la viande</li>
+            <li>Accord mets-vins en option (+38&nbsp;€)</li>
+            <li>Servi pour l'ensemble des convives</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ RÉSERVATION ============ -->
+  <section id="reservation">
+    <div class="wrap">
+      <div class="resa-grid">
+        <div class="resa-side reveal">
+          <div class="rule-cuisson"></div>
+          <p class="eyebrow">Réserver</p>
+          <h2>Choisissez votre<br>moment.</h2>
+          <p class="lead" style="margin-top:14px">Réservation en ligne jusqu'à 6 couverts. Une confirmation vous est envoyée par e-mail.</p>
+          <ul class="resa-info">
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+              <span>Service du mardi au samedi — fermé dimanche et lundi.</span>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+              <span>Déjeuner 12h–14h · Dîner 19h–22h30.</span>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              <span>À partir de 7 convives, contactez-nous directement.</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="resa-card reveal">
+          <form id="resaForm" novalidate>
+            <!-- step 1 date -->
+            <div class="resa-step">
+              <span class="resa-label"><span class="n">1</span>Date</span>
+              <div class="date-picker">
+                <button type="button" class="icon-btn" id="prevDay" aria-label="Jour précédent">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+                </button>
+                <span class="dp-label" id="dateLabel" aria-live="polite">—</span>
+                <button type="button" class="icon-btn" id="nextDay" aria-label="Jour suivant">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+                </button>
+              </div>
+            </div>
+
+            <div id="openDayFields">
+              <!-- step 2 service -->
+              <div class="resa-step">
+                <span class="resa-label"><span class="n">2</span>Service</span>
+                <div class="seg" role="group" aria-label="Choix du service">
+                  <button type="button" id="svcMidi" aria-pressed="false">Déjeuner</button>
+                  <button type="button" id="svcSoir" aria-pressed="true">Dîner</button>
+                </div>
+              </div>
+
+              <!-- step 3 couverts -->
+              <div class="resa-step">
+                <span class="resa-label"><span class="n">3</span>Couverts</span>
+                <div class="stepper">
+                  <button type="button" class="icon-btn" id="minus" aria-label="Retirer un couvert">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14"/></svg>
+                  </button>
+                  <span class="count" id="covers" aria-live="polite">2</span>
+                  <button type="button" class="icon-btn" id="plus" aria-label="Ajouter un couvert">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+                  </button>
+                </div>
+              </div>
+
+              <!-- step 4 slots -->
+              <div class="resa-step">
+                <span class="resa-label"><span class="n">4</span>Créneau</span>
+                <div class="slots" id="slots" role="group" aria-label="Créneaux disponibles"></div>
+              </div>
+            </div>
+
+            <!-- closed message -->
+            <div id="closedMsg" class="resa-closed" hidden>
+              Fermé ce jour-là. Choisissez un jour du <strong>mardi au samedi</strong>.
+            </div>
+
+            <!-- recap -->
+            <div class="recap" id="recap" hidden>
+              <div class="rline" id="recapLine"></div>
+              <button type="submit" class="btn btn-primary" id="confirmBtn" disabled>Confirmer la demande</button>
+              <p class="recap-hint">Sans engagement — l'équipe valide votre table sous 2 h.</p>
+            </div>
+
+            <!-- confirmation -->
+            <div class="confirm-box" id="confirmBox" hidden role="status" aria-live="polite">
+              <strong>Demande envoyée — merci&nbsp;!</strong>
+              <span id="confirmText"></span>
+              <button type="button" id="modifyBtn">Modifier ma demande</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ AVIS ============ -->
+  <section id="avis" class="avis">
+    <div class="wrap">
+      <div class="reveal" style="max-width:560px">
+        <div class="rule-cuisson"></div>
+        <p class="eyebrow">Avis</p>
+        <h2 class="h2">Ce qu'on dit de la table.</h2>
+      </div>
+      <div class="avis-grid">
+        <figure class="avis-card reveal">
+          <div class="stars" aria-label="5 étoiles sur 5">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3 6.5 7 .9-5 4.8 1.3 7L12 17.8 5.4 21.2 6.7 14.2 1.7 9.4l7-.9z"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3 6.5 7 .9-5 4.8 1.3 7L12 17.8 5.4 21.2 6.7 14.2 1.7 9.4l7-.9z"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3 6.5 7 .9-5 4.8 1.3 7L12 17.8 5.4 21.2 6.7 14.2 1.7 9.4l7-.9z"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3 6.5 7 .9-5 4.8 1.3 7L12 17.8 5.4 21.2 6.7 14.2 1.7 9.4l7-.9z"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3 6.5 7 .9-5 4.8 1.3 7L12 17.8 5.4 21.2 6.7 14.2 1.7 9.4l7-.9z"/></svg>
+          </div>
+          <blockquote>« Une côte de bœuf d'une justesse rare, et un service qui connaît vraiment son sujet. »</blockquote>
+          <figcaption class="who">Élise R. · Lyon 6ᵉ</figcaption>
+        </figure>
+        <figure class="avis-card reveal">
+          <div class="stars" aria-label="5 étoiles sur 5">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3 6.5 7 .9-5 4.8 1.3 7L12 17.8 5.4 21.2 6.7 14.2 1.7 9.4l7-.9z"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3 6.5 7 .9-5 4.8 1.3 7L12 17.8 5.4 21.2 6.7 14.2 1.7 9.4l7-.9z"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3 6.5 7 .9-5 4.8 1.3 7L12 17.8 5.4 21.2 6.7 14.2 1.7 9.4l7-.9z"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3 6.5 7 .9-5 4.8 1.3 7L12 17.8 5.4 21.2 6.7 14.2 1.7 9.4l7-.9z"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3 6.5 7 .9-5 4.8 1.3 7L12 17.8 5.4 21.2 6.7 14.2 1.7 9.4l7-.9z"/></svg>
+          </div>
+          <blockquote>« Le tartare au couteau et ce condiment à la maniguette&nbsp;: on revient rien que pour ça. »</blockquote>
+          <figcaption class="who">Marc D. · habitué</figcaption>
+        </figure>
+        <figure class="avis-card reveal">
+          <div class="stars" aria-label="5 étoiles sur 5">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3 6.5 7 .9-5 4.8 1.3 7L12 17.8 5.4 21.2 6.7 14.2 1.7 9.4l7-.9z"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3 6.5 7 .9-5 4.8 1.3 7L12 17.8 5.4 21.2 6.7 14.2 1.7 9.4l7-.9z"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3 6.5 7 .9-5 4.8 1.3 7L12 17.8 5.4 21.2 6.7 14.2 1.7 9.4l7-.9z"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3 6.5 7 .9-5 4.8 1.3 7L12 17.8 5.4 21.2 6.7 14.2 1.7 9.4l7-.9z"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3 6.5 7 .9-5 4.8 1.3 7L12 17.8 5.4 21.2 6.7 14.2 1.7 9.4l7-.9z"/></svg>
+          </div>
+          <blockquote>« Cadre épuré, cuisine généreuse. C'est la table où j'emmène mes clients. »</blockquote>
+          <figcaption class="who">Sophie V. · Villeurbanne</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section id="faq">
+    <div class="wrap">
+      <div class="faq-grid">
+        <div class="reveal">
+          <div class="rule-cuisson"></div>
+          <p class="eyebrow">FAQ</p>
+          <h2 class="h2">Bon à savoir<br>avant de venir.</h2>
+        </div>
+        <div class="faq-list reveal" id="faqList">
+          <!-- items injected pattern, but written statically for autonomy -->
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false">Quels sont vos jours et horaires d'ouverture&nbsp;?
+              <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+            </button>
+            <div class="faq-a"><div class="faq-a-inner">Du mardi au samedi, midi (12h–14h) et soir (19h–22h30). Nous sommes fermés le dimanche et le lundi.</div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false">Proposez-vous des options sans viande&nbsp;?
+              <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+            </button>
+            <div class="faq-a"><div class="faq-a-inner">Oui. Nous proposons toujours un plat sans viande et des accompagnements végétariens. Indiquez-le à la réservation pour que la cuisine s'organise.</div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false">Comment réserver pour un groupe&nbsp;?
+              <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+            </button>
+            <div class="faq-a"><div class="faq-a-inner">Jusqu'à 6 couverts, la réservation se fait en ligne. À partir de 7 personnes, contactez-nous par téléphone ou e-mail&nbsp;: nous étudions chaque demande de groupe et privatisation.</div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false">Gérez-vous les allergies et intolérances&nbsp;?
+              <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+            </button>
+            <div class="faq-a"><div class="faq-a-inner">Bien sûr. Signalez vos allergies au moment de réserver&nbsp;; la cuisine adapte les plats lorsque c'est possible et vous oriente vers les meilleurs choix.</div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false">Y a-t-il un parking à proximité&nbsp;?
+              <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+            </button>
+            <div class="faq-a"><div class="faq-a-inner">Le parking Croix-Rousse est à 3 minutes à pied. En transports, la station de métro Croix-Rousse (ligne C) est à 200 mètres.</div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false">Quelle est votre politique d'annulation&nbsp;?
+              <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+            </button>
+            <div class="faq-a"><div class="faq-a-inner">L'annulation est gratuite jusqu'à 24 h avant. Passé ce délai, un simple message nous permet de libérer la table pour d'autres gourmands.</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CONTACT ============ -->
+  <section id="contact" class="contact on-dark">
+    <div class="wrap">
+      <div class="contact-grid">
+        <div class="reveal">
+          <div class="rule-cuisson"></div>
+          <p class="eyebrow">Contact</p>
+          <h2>Nous trouver.</h2>
+          <ul class="contact-list">
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              <div><div class="k">Adresse</div>14 rue des Pierres Plantées<br>69001 Lyon · Croix-Rousse</div>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>
+              <div><div class="k">Téléphone</div><a href="tel:+33478000000">04 78 00 00 00</a></div>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
+              <div><div class="k">E-mail</div><a href="mailto:bonjour@lamaniguette.fr">bonjour@lamaniguette.fr</a></div>
+            </li>
+          </ul>
+          <table class="hours-table" aria-label="Horaires d'ouverture">
+            <tbody>
+              <tr class="closed"><td>Lundi</td><td>Fermé</td></tr>
+              <tr><td>Mardi – Vendredi</td><td>12h–14h · 19h–22h30</td></tr>
+              <tr><td>Samedi</td><td>19h–22h30</td></tr>
+              <tr class="closed"><td>Dimanche</td><td>Fermé</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="reveal">
+          <div class="map-box">
+            <div class="pin">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              <div><b>LaManiguette</b><br>14 rue des Pierres Plantées, Lyon</div>
+            </div>
+          </div>
+          <a href="#reservation" class="btn btn-primary" style="margin-top:24px;width:100%">Réserver une table</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-bar"></div>
+    <div class="footer-row">
+      <a href="#" class="brand">La<b style="color:var(--ember)">Maniguette</b></a>
+      <small>Bistronomie de la viande · Lyon Croix-Rousse</small>
+      <small>© 2026 LaManiguette · <a href="#reservation">Réserver</a></small>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---------- IMAGES (Unsplash) avec fallback CSS ---------- */
+  var imgs = [
+    {el:document.getElementById('heroMedia'), url:'https://images.unsplash.com/photo-1600891964092-4316c288032e?auto=format&fit=crop&w=1600&q=80', bg:true},
+    {el:document.getElementById('lieuImg'), url:'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=900&q=80', bg:false},
+    {el:document.getElementById('feature1Img'), url:'https://images.unsplash.com/photo-1558030006-450675393462?auto=format&fit=crop&w=900&q=80', bg:true}
+  ];
+  imgs.forEach(function(it){
+    if(!it.el) return;
+    if(it.bg){
+      var probe = new Image();
+      probe.onload = function(){ it.el.style.backgroundImage = "url('"+it.url+"')"; };
+      probe.src = it.url; // si échec : le dégradé CSS reste (fallback intentionnel)
+    } else {
+      it.el.src = it.url;
+      it.el.onerror = function(){ it.el.style.display='none'; };
+    }
+  });
+
+  /* ---------- NAV MOBILE ---------- */
+  var burger = document.getElementById('hamburger');
+  var links = document.getElementById('navLinks');
+  burger.addEventListener('click', function(){
+    var open = links.classList.toggle('open');
+    burger.setAttribute('aria-expanded', open ? 'true':'false');
+    burger.setAttribute('aria-label', open ? 'Fermer le menu':'Ouvrir le menu');
+  });
+  links.addEventListener('click', function(e){
+    if(e.target.tagName === 'A'){
+      links.classList.remove('open');
+      burger.setAttribute('aria-expanded','false');
+    }
+  });
+
+  /* ---------- FAQ ACCORDÉON ---------- */
+  document.querySelectorAll('.faq-q').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var expanded = btn.getAttribute('aria-expanded') === 'true';
+      var panel = btn.nextElementSibling;
+      btn.setAttribute('aria-expanded', expanded ? 'false':'true');
+      panel.style.maxHeight = expanded ? null : panel.scrollHeight + 'px';
+    });
+  });
+
+  /* ---------- REVEAL ON SCROLL ---------- */
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if('IntersectionObserver' in window && !prefersReduced){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); }
+      });
+    }, {threshold:.12, rootMargin:'0px 0px -40px 0px'});
+    document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+  } else {
+    document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('in'); });
+  }
+
+  /* ---------- RÉSERVATION ---------- */
+  var JOURS = ['dimanche','lundi','mardi','mercredi','jeudi','vendredi','samedi'];
+  var JOURS_C = ['Dim','Lun','Mar','Mer','Jeu','Ven','Sam'];
+  var MOIS = ['janv.','févr.','mars','avr.','mai','juin','juil.','août','sept.','oct.','nov.','déc.'];
+  var SLOTS = {
+    midi: ['12:00','12:30','13:00','13:30'],
+    soir: ['19:00','19:30','20:00','20:30','21:00','21:30']
+  };
+
+  var today = new Date(); today.setHours(0,0,0,0);
+  var current = new Date(today);
+  var service = 'soir';
+  var covers = 2;
+  var selectedSlot = null;
+
+  var dateLabel = document.getElementById('dateLabel');
+  var prevBtn = document.getElementById('prevDay');
+  var nextBtn = document.getElementById('nextDay');
+  var openFields = document.getElementById('openDayFields');
+  var closedMsg = document.getElementById('closedMsg');
+  var svcMidi = document.getElementById('svcMidi');
+  var svcSoir = document.getElementById('svcSoir');
+  var coversEl = document.getElementById('covers');
+  var minus = document.getElementById('minus');
+  var plus = document.getElementById('plus');
+  var slotsEl = document.getElementById('slots');
+  var recap = document.getElementById('recap');
+  var recapLine = document.getElementById('recapLine');
+  var confirmBtn = document.getElementById('confirmBtn');
+  var confirmBox = document.getElementById('confirmBox');
+  var confirmText = document.getElementById('confirmText');
+  var modifyBtn = document.getElementById('modifyBtn');
+  var form = document.getElementById('resaForm');
+
+  function isClosed(d){ var g = d.getDay(); return g === 0 || g === 1; } // dim & lun
+  function sameDay(a,b){ return a.getFullYear()===b.getFullYear() && a.getMonth()===b.getMonth() && a.getDate()===b.getDate(); }
+  function fmtDate(d){ return JOURS_C[d.getDay()] + ' ' + d.getDate() + ' ' + MOIS[d.getMonth()]; }
+
+  // pseudo-dispo stable selon date+service+slot
+  function slotTaken(d, svc, slot){
+    var key = d.getFullYear()+'-'+d.getMonth()+'-'+d.getDate()+'-'+svc+'-'+slot;
+    var h = 0;
+    for(var i=0;i<key.length;i++){ h = (h*31 + key.charCodeAt(i)) >>> 0; }
+    return (h % 10) < 3; // ~30% complet
+  }
+
+  function renderSlots(){
+    slotsEl.innerHTML = '';
+    var list = SLOTS[service];
+    list.forEach(function(slot){
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'slot';
+      b.textContent = slot;
+      var taken = slotTaken(current, service, slot);
+      if(taken){
+        b.disabled = true;
+        b.setAttribute('aria-label', slot + ' — complet');
+      } else {
+        b.setAttribute('aria-pressed', 'false');
+        b.addEventListener('click', function(){
+          selectedSlot = slot;
+          slotsEl.querySelectorAll('.slot').forEach(function(s){ s.setAttribute('aria-pressed','false'); });
+          b.setAttribute('aria-pressed','true');
+          updateRecap();
+        });
+      }
+      slotsEl.appendChild(b);
+    });
+  }
+
+  function updateRecap(){
+    if(selectedSlot){
+      recap.hidden = false;
+      var svcLabel = service === 'midi' ? 'Déjeuner' : 'Dîner';
+      recapLine.innerHTML = fmtDate(current) +
+        ' <span class="sep">·</span> ' + svcLabel +
+        ' <span class="sep">·</span> ' + covers + (covers>1?' couverts':' couvert') +
+        ' <span class="sep">·</span> ' + selectedSlot;
+      confirmBtn.disabled = false;
+    } else {
+      recap.hidden = true;
+      confirmBtn.disabled = true;
+    }
+  }
+
+  function render(){
+    dateLabel.textContent = fmtDate(current);
+    prevBtn.disabled = sameDay(current, today);
+    confirmBox.hidden = true;
+    form.querySelector('#openDayFields').hidden = false;
+
+    if(isClosed(current)){
+      openFields.hidden = true;
+      closedMsg.hidden = false;
+      recap.hidden = true;
+      selectedSlot = null;
+      return;
+    }
+    closedMsg.hidden = true;
+    openFields.hidden = false;
+    selectedSlot = null;
+    renderSlots();
+    updateRecap();
+  }
+
+  prevBtn.addEventListener('click', function(){
+    if(sameDay(current, today)) return;
+    current.setDate(current.getDate()-1);
+    render();
+  });
+  nextBtn.addEventListener('click', function(){
+    current.setDate(current.getDate()+1);
+    render();
+  });
+
+  function setService(svc){
+    service = svc;
+    svcMidi.setAttribute('aria-pressed', svc==='midi'?'true':'false');
+    svcSoir.setAttribute('aria-pressed', svc==='soir'?'true':'false');
+    selectedSlot = null;
+    renderSlots();
+    updateRecap();
+  }
+  svcMidi.addEventListener('click', function(){ setService('midi'); });
+  svcSoir.addEventListener('click', function(){ setService('soir'); });
+
+  function setCovers(n){
+    covers = Math.max(1, Math.min(6, n));
+    coversEl.textContent = covers;
+    minus.disabled = covers <= 1;
+    plus.disabled = covers >= 6;
+    updateRecap();
+  }
+  minus.addEventListener('click', function(){ setCovers(covers-1); });
+  plus.addEventListener('click', function(){ setCovers(covers+1); });
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    if(!selectedSlot) return;
+    var svcLabel = service === 'midi' ? 'Déjeuner' : 'Dîner';
+    confirmText.textContent = 'Votre table pour ' + covers + (covers>1?' personnes':' personne') +
+      ' le ' + fmtDate(current).toLowerCase() + ', ' + svcLabel.toLowerCase() + ' à ' + selectedSlot +
+      ', est en attente de confirmation. Vous recevrez un e-mail sous 2 h.';
+    recap.hidden = true;
+    openFields.hidden = true;
+    closedMsg.hidden = true;
+    confirmBox.hidden = false;
+    confirmBox.focus && confirmBox.setAttribute('tabindex','-1');
+    confirmBox.focus();
+  });
+
+  modifyBtn.addEventListener('click', function(){
+    confirmBox.hidden = true;
+    render();
+  });
+
+  // init
+  setCovers(2);
+  render();
+})();
+</script>
+</body>
+</html>
